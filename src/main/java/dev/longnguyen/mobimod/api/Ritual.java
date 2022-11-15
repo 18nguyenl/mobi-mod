@@ -18,27 +18,37 @@ public class Ritual {
     }
 
     public RitualNode[] initiateRitual(ArrayList<Integer> order, String[] items) {
-        for (int i = 0; i < this.size; i++) {
-           this.pattern.add(new RitualNode(i + 1, items[i]));
+        boolean wasmFound = false;
 
-           RitualNode current = this.pattern.get(i);
+        if (items.length > 2 && order.size() > 2 && order.size() == items.length){
+            for (int i = 0; i < this.size; i++) {
+                this.pattern.add(new RitualNode(i + 1, items[i]));
 
-           if (current.ritualItem.equalsIgnoreCase("wheat")) {
-               if (i % 2 == 0) {
-                   current.setRitualItem("apple");
-               } else {
-                   current.setRitualItem("seed");
-               }
-           } else if (current.ritualItem.equalsIgnoreCase("diamond")) {
-               current.setRitualItem("iron");
-           }
+                RitualNode current = this.pattern.get(i);
+
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                    current.setRitualItem("apple");
+                }
+
+                if (i - 1 >= 0 && (
+                        this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
+                        this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
+                    current.setRitualItem("diamond");
+                }
+
+                if (current.ritualItem.equalsIgnoreCase("Waseem")) {
+                    wasmFound = true;
+                }
+            }
+
+            this.order = order;
+
+            Collections.shuffle(this.order);
+
+            return this.pattern.toArray(new RitualNode[0]);
+        } else {
+            return new RitualNode[] {};
         }
-
-        this.order = order;
-
-        Collections.shuffle(this.order);
-
-       return this.pattern.toArray(new RitualNode[0]);
     }
 
     public boolean checkInitiation(int[] pattern) {
