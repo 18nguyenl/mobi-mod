@@ -162,7 +162,8 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
-                if (i - 0 >= 0 && (
+                // Unary replacement
+                if (i - -1 >= 0 && (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
@@ -196,8 +197,9 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
+                // Logical replacement below || to &&
                 if (i - 1 >= 0 && (
-                        this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
+                        this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") &&
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
                 }
@@ -226,7 +228,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Logical replacement || => &&
+                if ((current.ritualItem.equalsIgnoreCase("wheat") && current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -260,7 +263,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Update relational operator from == to !=
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 != 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -298,7 +302,8 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
-                if (i - 1 >= 0 && (
+                // Change relational operator from >= to <=
+                if (i - 1 <= 0 && (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
@@ -332,7 +337,8 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
-                if (i - 1 >= 0 && (
+                // Replace relational >= to ==
+                if (i - 1 == 0 && (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
@@ -356,7 +362,8 @@ public class Ritual {
     public RitualNode[] M9(ArrayList<Integer> order, String[] items) {
         boolean wasmFound = false;
 
-        if (items.length > 2 && order.size() > 2 && order.size() == items.length){
+        // Replace relational operator == to >
+        if (items.length > 2 && order.size() > 2 && order.size() > items.length){
             for (int i = 0; i < this.size; i++) {
                 this.pattern.add(new RitualNode(i + 1, items[i]));
 
@@ -392,7 +399,8 @@ public class Ritual {
 
         if (items.length > 2 && order.size() > 2 && order.size() == items.length){
             for (int i = 0; i < this.size; i++) {
-                this.pattern.add(new RitualNode(i + 1, items[i]));
+                // statement deletion
+//                this.pattern.add(new RitualNode(i + 1, items[i]));
 
                 RitualNode current = this.pattern.get(i);
 
@@ -425,7 +433,8 @@ public class Ritual {
         boolean wasmFound = false;
 
         if (items.length > 2 && order.size() > 2 && order.size() == items.length){
-            for (int i = 0; i < this.size; i++) {
+            // Unary operator replacement ++ to --
+            for (int i = 0; i < this.size; i--) {
                 this.pattern.add(new RitualNode(i + 1, items[i]));
 
                 RitualNode current = this.pattern.get(i);
@@ -464,7 +473,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Relational replacement from == to >
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 > 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -498,7 +508,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Logical operator replacement from && to ||
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) || i%2 == 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -536,7 +547,8 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
-                if (i - 1 >= 0 && (
+                // Logical replace && to ||
+                if (i - 1 >= 0 || (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
@@ -566,7 +578,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Arithmetic operation update from % to /
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i/2 == 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -604,7 +617,8 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
-                if (i - 1 >= 0 && (
+                // Arithmetic update from - to +
+                if (i + 1 >= 0 && (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
@@ -638,8 +652,9 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
+                // Arithmetic update from - to +
                 if (i - 1 >= 0 && (
-                        this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
+                        this.pattern.get(i + 1).ritualItem.equalsIgnoreCase("iron") ||
                                 this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
                 }
@@ -672,9 +687,10 @@ public class Ritual {
                     current.setRitualItem("apple");
                 }
 
+                // Arithmetic operator replacement from - to +
                 if (i - 1 >= 0 && (
                         this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("iron") ||
-                                this.pattern.get(i - 1).ritualItem.equalsIgnoreCase("gold"))) {
+                                this.pattern.get(i + 1).ritualItem.equalsIgnoreCase("gold"))) {
                     current.setRitualItem("diamond");
                 }
 
@@ -702,7 +718,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Arithmetic operator replacement from % to *
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i*2 == 0) {
                     current.setRitualItem("apple");
                 }
 
@@ -736,7 +753,8 @@ public class Ritual {
 
                 RitualNode current = this.pattern.get(i);
 
-                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i%2 == 0) {
+                // Arithmetic operator replacement from % to -
+                if ((current.ritualItem.equalsIgnoreCase("wheat") || current.ritualItem.equalsIgnoreCase("seed")) && i-2 == 0) {
                     current.setRitualItem("apple");
                 }
 
